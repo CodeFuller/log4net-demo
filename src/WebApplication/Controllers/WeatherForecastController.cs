@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using WebApplication.Extensions;
 
 namespace WebApplication.Controllers
 {
@@ -28,7 +29,7 @@ namespace WebApplication.Controllers
 			logger.LogInformation("Processing request ...");
 
 			var rng = new Random();
-			return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+			var data = Enumerable.Range(1, 5).Select(index => new WeatherForecast
 			{
 				Date = DateTime.Now.AddDays(index),
 #pragma warning disable CA5394 // Do not use insecure randomness
@@ -37,6 +38,10 @@ namespace WebApplication.Controllers
 #pragma warning restore CA5394 // Do not use insecure randomness
 			})
 			.ToArray();
+
+			HttpContext.AddRequestLogProperty("data_size", data.Length);
+
+			return data;
 		}
 	}
 }
