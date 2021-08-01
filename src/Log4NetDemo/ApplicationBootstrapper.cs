@@ -19,6 +19,7 @@ namespace Log4NetDemo
 
 		protected override void BootstrapLogging(ILoggerFactory loggerFactory, IConfiguration configuration)
 		{
+			loggerFactory.AddLog4Net();
 		}
 	}
 }
