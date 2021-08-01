@@ -20,9 +20,9 @@ namespace WebApplication
 				app.UseDeveloperExceptionPage();
 			}
 
-			app.UseMiddleware<RequestLoggingMiddleware>();
-
 			app.UseRouting();
+
+			app.UseMiddleware<RequestLoggingMiddleware>();
 
 			app.UseAuthorization();
 

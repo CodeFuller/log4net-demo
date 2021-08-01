@@ -22,6 +22,8 @@ namespace WebApplication.Middleware
 		{
 			var sw = Stopwatch.StartNew();
 
+			using var scope = logger.AddScopeProperty("function", context.Request.RouteValues["action"]?.ToString());
+
 			try
 			{
 				await next(context);

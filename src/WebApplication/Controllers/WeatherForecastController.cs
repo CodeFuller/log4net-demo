@@ -24,7 +24,7 @@ namespace WebApplication.Controllers
 		}
 
 		[HttpGet]
-		public IEnumerable<WeatherForecast> Get()
+		public IEnumerable<WeatherForecast> GetWeatherForecast()
 		{
 			logger.LogInformation("Processing request ...");
 
