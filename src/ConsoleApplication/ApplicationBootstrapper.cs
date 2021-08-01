@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Log4NetDemo
+namespace ConsoleApplication
 {
 	internal class ApplicationBootstrapper : BasicApplicationBootstrapper<IApplicationLogic>
 	{

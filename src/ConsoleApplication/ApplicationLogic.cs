@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using CodeFuller.Library.Bootstrap;
 using Microsoft.Extensions.Logging;
 
-namespace Log4NetDemo
+namespace ConsoleApplication
 {
 	internal class ApplicationLogic : IApplicationLogic
 	{
