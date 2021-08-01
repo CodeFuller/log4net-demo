@@ -19,6 +19,15 @@ namespace ConsoleApplication
 		{
 			logger.LogInformation("Starting application ...");
 
+			using (logger.AddScopeProperty("property1", "VALUE_1"))
+			{
+				logger.LogInformation("Message from first scope");
+				using (logger.AddScopeProperty("property2", "VALUE_2"))
+				{
+					logger.LogInformation("Message from second scope");
+				}
+			}
+
 			logger.LogInformation("Exiting application ...");
 
 			return Task.FromResult(0);
