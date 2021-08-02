@@ -26,22 +26,25 @@ namespace WebApplication.Controllers
 		[HttpGet]
 		public IEnumerable<WeatherForecast> GetWeatherForecast()
 		{
-			logger.LogInformation("Processing request ...");
-
-			var rng = new Random();
-			var data = Enumerable.Range(1, 5).Select(index => new WeatherForecast
+			using (logger.CreateRequestLoggingScope(HttpContext, "caller_id", "TestCaller"))
 			{
-				Date = DateTime.Now.AddDays(index),
+				logger.LogInformation("Processing request ...");
+
+				var rng = new Random();
+				var data = Enumerable.Range(1, 5).Select(index => new WeatherForecast
+					{
+						Date = DateTime.Now.AddDays(index),
 #pragma warning disable CA5394 // Do not use insecure randomness
-				TemperatureC = rng.Next(-20, 55),
-				Summary = Summaries[rng.Next(Summaries.Length)],
+						TemperatureC = rng.Next(-20, 55),
+						Summary = Summaries[rng.Next(Summaries.Length)],
 #pragma warning restore CA5394 // Do not use insecure randomness
-			})
-			.ToArray();
+					})
+					.ToArray();
 
-			HttpContext.AddRequestLogProperty("data_size", data.Length);
+				HttpContext.AddRequestLogProperty("data_size", data.Length);
 
-			return data;
+				return data;
+			}
 		}
 	}
 }

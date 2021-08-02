@@ -22,7 +22,7 @@ namespace WebApplication.Middleware
 		{
 			var sw = Stopwatch.StartNew();
 
-			using var scope = logger.AddScopeProperty("function", context.Request.RouteValues["action"]?.ToString());
+			using var scope1 = logger.AddScopeProperty("function", context.Request.RouteValues["action"]);
 
 			try
 			{
@@ -37,6 +37,7 @@ namespace WebApplication.Middleware
 				var succeeded = statusCode >= 200 && statusCode < 299;
 				var dataSize = context.GetRequestLogProperty("data_size");
 
+				using var scope2 = logger.CreateRequestLoggingScope(context);
 				logger.LogInformation($"requestInfo success={succeeded} duration={sw.ElapsedMilliseconds} statusCode={statusCode} data_size={dataSize}");
 			}
 		}
